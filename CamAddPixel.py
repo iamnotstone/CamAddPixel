@@ -4,7 +4,7 @@ import wx
 from PIL import Image
 
 SIZE = (640, 480)
-
+cam = Device(1)
 def generateSque():
     a = []
     for i in range(640):
@@ -26,9 +26,8 @@ def getRectFromImage(LeftTop,RightButtom):
             dataAry.append((RightButtom[0] - 1,i))
     return dataAry
     
-def get_image():
+def get_image(cam):
     # Put your code here to return a PIL image from the camera.
-    cam = Device(1)
     
     #return Image.new('L', SIZE)
     return cam.getImage(1)
@@ -51,7 +50,7 @@ class Panel(wx.Panel):
         self.Update()
         wx.CallLater(10, self.update)
     def create_bitmap(self):
-        image = get_image()
+        image = get_image(cam)
         #image = image.convert('L')
         #print list(image.getdata())
         a = generateSque()
